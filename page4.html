@@ -5,143 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
         body{
+            height: 100vh;
+            background-image: url(bbb.jpg);
+            background-size: cover;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height:100vh ;
-            background:#53144f ;
         }
         .container{
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 30px;
-            background:#a9649d ;
-            padding: 40px 60px;
-        }
-        .reset{
-            padding: 15px 20px;
-            color:#04100d;
-            background: #d4a8db;
-            border: none;
-            font-size: 1.5em;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        .game{
-            width: 430px;
-            height: 430px;
+            width: 500px;
+            height: 500px;
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            transform-style: preserve-3d;
-            perspective: 500px;
+            margin: auto;
         }
-        .item{
-            position: relative;
-            width:100px;
-            height: 100px;
-            display:flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3em;
-            background: #fff;
-            transform: rotateY(180deg);
-            transition: 0.25s;
+        .m_card{
+           
+            width: 25%;
+            height: 33.333%;
+            position:relative ;
+            transform: scale(1);
+        }
+        .m_card:active{
+            transform: scale(.97);
+            transition:transform .2S;
+        }
+        .m_card.flip{
+            transform: rotateY('180deg');
+        }
+        .face,.back{
             
+            position:absolute ;
+            width: 95%;
+            height: 95%;
+            background: blueviolet;
         }
-    
-        .item::after{
-            content: ' ';
-            position: absolute;
-            inset:0;
-            background: #53144f;
-            /* opacity: 0.85; */
-            transition: 0.25s;
-            transform: rotate(0deg);
-            backface-visibility: hidden;
-
-        }
-        .item.boxOpen{
-            transform: rotateY(0deg);
-        }
-        .boxOpen:after ,
-        .boxMatch:after{
-            transform: rotateY(180deg);
+        img{
+            width: 100px;
 
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Memory Game</h2>
-        <div class="game"></div>
-        <button class="reset">Reset Game</button>
-    </div>
+    <section class="container">
+        <div class="m_card">
+            <img class="face" src="A1.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        <div class="m_card">
+            <img class="face" src="A1.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        <div class="m_card">
+            <img class="face" src="A2.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        <div class="m_card">
+            <img class="face" src="A2.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        <div class="m_card">
+            <img class="face" src="A3.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        <div class="m_card">
+            <img class="face" src="A3.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        <div class="m_card">
+            <img class="face" src="A4.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        <div class="m_card">
+            <img class="face" src="A4.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        <div class="m_card">
+            <img class="face" src="A5.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        <div class="m_card">
+            <img class="face" src="A5.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        <div class="m_card">
+            <img class="face" src="A6.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        <div class="m_card">
+            <img class="face" src="A6.jpg" >
+            <img class="back" src="R.jpg">
+        </div>
+        
+    </section>
+
+
     <script>
-        const emojis = ["😍", "😍", "❤️", "❤️", "😎", "😎", "😭", "😭", "😴", "😴", "😡", "😡", "🫶🏼", "🫶🏼", '🌕', '🌕'];
-        const gameContainer = document.querySelector('.game');
-        const resetButton = document.querySelector('.reset');
-        let openedCards = [];
-
-        function shuffle(array) {
-            array.sort(() => Math.random() - 0.5);
+        const cards=document.querySelectorAll('.container');
+        function flipCard(){
+            this.classList.toggle('flip');
         }
+        cards.forEach(card=>card.addEventListener('click',flipCard))
 
-        function createCard(emoji) {
-            const card = document.createElement('div');
-            card.classList.add('item');
-            card.innerHTML = emoji;
-            card.addEventListener('click', function() {
-                if (openedCards.length < 2 && !this.classList.contains('boxOpen')) {
-                    this.classList.add('boxOpen');
-                    openedCards.push(this);
-                    if (openedCards.length === 2) {
-                        checkMatch();
-                    }
-                }
-            });
-            return card;
-        }
-
-        function checkMatch() {
-            const [card1, card2] = openedCards;
-            if (card1.innerHTML === card2.innerHTML) {
-                card1.classList.add('boxMatch');
-                card2.classList.add('boxMatch');
-                openedCards = [];
-                if (document.querySelectorAll('.boxMatch').length === emojis.length) {
-                    alert('You won!');
-                }
-            } else {
-                setTimeout(() => {
-                    card1.classList.remove('boxOpen');
-                    card2.classList.remove('boxOpen');
-                    openedCards = [];
-                }, 500);
-            }
-        }
-
-        resetButton.addEventListener('click', function() {
-            gameContainer.innerHTML = '';
-            startGame();
-        });
-
-        function startGame() {
-            openedCards = [];
-            shuffle(emojis);
-            emojis.forEach(emoji => {
-                const card = createCard(emoji);
-                gameContainer.appendChild(card);
-            });
-        }
-
-        startGame();
     </script>
 </body>
 </html>
