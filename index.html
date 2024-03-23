@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
     <style>
        body {
         height: 50vh;
@@ -11,18 +12,17 @@
         background-size: cover;
         background-position: top;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-
        }
-        .img1 {
-            display: flex;
-            justify-content: center;
-        }
+       .title{
+        text-align: center;
+       }
+        
         .btn1 {
-            display: flex;
-            justify-content: center;
-            margin-top: 100px;
+            text-align: center;
+            margin-top: 70px;
         }
         .start {
         --glow-color: rgb(176, 252, 255);
@@ -43,6 +43,7 @@
         text-shadow: 0 0 0.5em var(--glow-color);
         position: relative;
         transition: all 0.3s;
+        display: inline-block;
 }
 
         .start::after {
@@ -74,10 +75,21 @@
         }
         a{
             color: black;
+            text-decoration: none;
+        }
+        h1{
+            font-family: "Sofia", sans-serif;
+            font-size: 100px;
+            color: #fff; /* Couleur du texte */
+            text-shadow: 3px 3px 4px yellow;
+            margin: 0;
         }
     </style>
 </head>
 <body>
+    <div class="title">
+        <h1>Remember Me</h1>
+    </div>
     
     <div class="btn1">
         <button class="start"><a href="page2.html">Start Game</a></button>

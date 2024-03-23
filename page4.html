@@ -12,8 +12,9 @@
         }
         body {
             height: 100vh;
-            background-image: url(bbb.jpg);
+            background-image: url(bk.jpg);
             background-size: cover;
+            background-position: top;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,13 +23,15 @@
             width: 500px;
             height: 500px;
             perspective: 1000px;
+            margin-top: 5%;
         }
         .m_card {
             width: 25%;
             height: 33.333%;
             position: relative;
+            transform: scale(1);
             transform-style: preserve-3d;
-            transition: transform 0.5s;
+            transition: transform .5s;
             float: left; 
         }
         .m_card.flip {
@@ -38,71 +41,100 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            padding: 10px;
             background: blueviolet;
+            border-radius: 5px;
+            backface-visibility: hidden;
         }
-        img {
-            width: 100px;
+        .face {
+            transform: rotateY(180deg);
         }
     </style>
 </head>
 <body>
     <section class="container">
-        <div class="m_card">
+        <div class="m_card" data-framework="A">
             <img class="face" src="A1.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        <div class="m_card">
+        <div class="m_card" data-framework="A">
             <img class="face" src="A1.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        <div class="m_card">
+        <div class="m_card" data-framework="B">
             <img class="face" src="A2.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        <div class="m_card">
+        <div class="m_card" data-framework="B">
             <img class="face" src="A2.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        <div class="m_card">
+        <div class="m_card" data-framework="C">
             <img class="face" src="A3.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        <div class="m_card">
+        <div class="m_card" data-framework="C">
             <img class="face" src="A3.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        <div class="m_card">
+        <div class="m_card" data-framework="D">
             <img class="face" src="A4.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        <div class="m_card">
+        <div class="m_card" data-framework="D">
             <img class="face" src="A4.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        <div class="m_card">
+        <div class="m_card" data-framework="E">
             <img class="face" src="A5.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        <div class="m_card">
+        <div class="m_card" data-framework="E">
             <img class="face" src="A5.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        <div class="m_card">
+        <div class="m_card" data-framework="F">
             <img class="face" src="A6.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        <div class="m_card">
+        <div class="m_card" data-framework="F">
             <img class="face" src="A6.jpg" >
             <img class="back" src="R.jpg">
         </div>
-        
     </section>
 
 
     <script>
         const cards = document.querySelectorAll('.m_card');
+        let hasFlip = false;
+        let firstCard, secondCard;
         function flipCard() {
-            this.classList.toggle('flip');
+            this.classList.add('flip');
+            if (!hasFlip) {
+                // 1click
+                hasFlip = true;
+                firstCard = this;
+                return;
+            } 
+            // 2card
+            hasFlip = false;
+            secondCard = this; 
+            checkmatch();
+        }
+        // match?
+        function checkmatch(){
+            let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+            isMatch ? disablecards() : unflipcards();
+        }
+        function disablecards(){
+            firstCard.removeEventListener('click', flipCard);
+            secondCard.removeEventListener('click', flipCard);
+        }
+        function unflipcards(){
+             setTimeout(() => {
+                firstCard.classList.remove('flip');
+                secondCard.classList.remove('flip');
+            }, 1500);
         }
         cards.forEach(card => card.addEventListener('click', flipCard));
     </script>
