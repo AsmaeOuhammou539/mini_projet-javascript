@@ -49,6 +49,11 @@
         .face {
             transform: rotateY(180deg);
         }
+        p {
+            text-align: center;
+            font-size: 60px;
+            margin-top: 0px;
+}
     </style>
 </head>
 <body>
@@ -101,9 +106,9 @@
             <img class="face" src="" >
             <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
         </div>
-    </section>
+    </section> 
 
-
+    <div id="timer"></div>
     <script>
         const cards = document.querySelectorAll('.m_card');
         let hasFlip = false;
@@ -137,6 +142,34 @@
             }, 1500);
         }
         cards.forEach(card => card.addEventListener('click', flipCard));
+        let timeLeft = 20
+        
+// Display the timer
+        const timerDisplay = document.getElementById('timer');
+
+// Update the timer display function
+        function updateTimerDisplay() {
+         const minutes = Math.floor(timeLeft / 20);
+         const seconds = timeLeft % 20;
+           timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+};
+// Update the timer every second
+const timerInterval = setInterval(() => {
+    // Update the timer display
+    updateTimerDisplay();
+    
+    // Decrement the time left
+    timeLeft--;
+
+    // Check if time has run out
+    if (timeLeft < 0) {
+        clearInterval(timerInterval);
+        alert('Time\'s up!');
+        // You can add your game over logic here
+    }
+}, 1000);
+        
     </script>
+   
 </body>
 </html>
