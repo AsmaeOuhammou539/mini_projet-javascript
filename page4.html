@@ -5,138 +5,189 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        
         * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
+
         body {
             height: 100vh;
+            display: flex;
             background-image: url(https://i.ytimg.com/vi/77cay00Q-Hg/maxresdefault.jpg);
             background-size: cover;
-            background-position: top;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
+        
         .container {
             width: 450px;
-            height: 450px;
+            /*height: 450px;*/
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
             perspective: 1000px;
-            margin-top: 5%;
         }
-        .m_card {
+
+        .m-card {
+            
             width: 100px;
             height: 100px;
+            margin: 2px;
             position: relative;
             transform: scale(1);
             transform-style: preserve-3d;
             transition: transform .5s;
-            float: left; 
+            box-shadow: 1px 1px 1px rgba(0,0,0,.3);
         }
-        .m_card.flip {
+
+        .m-card:active {
+            transform: scale(0.97);
+            transition: transform .2s;
+        }
+
+        .m-card.flip {
             transform: rotateY(180deg);
         }
-        .face, .back {
-            position: absolute;
+
+        .front-face,
+        .back-face {
             width: 100%;
             height: 100%;
-            padding: 5px;
-            background: rgb(230, 220, 240);
+            padding: 2px;
+            position: absolute;
             border-radius: 5px;
+            background: #1C7CCC;
             backface-visibility: hidden;
         }
-        .face {
-            transform: rotateY(180deg);
+
+        .front-face {
+             transform: rotateY(180deg);
         }
     </style>
 </head>
 <body>
+    
     <section class="container">
-        <div class="m_card" data-framework="A">
-            <img class="face" src="https://th.bing.com/th/id/R.c5167551a2007cb8bf8d7f6e5915e580?rik=UP2otjDi%2f2Eegw&riu=http%3a%2f%2fmoi-jose.m.o.pic.centerblog.net%2fo%2f085d80d8.jpg&ehk=S8pO%2fPz88HfYZfkvbk3fRWoG2ZTFyTK1xUWYl62%2fGGo%3d&risl=&pid=ImgRaw&r=0" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+        <div class="m-card" data-framework="image1">
+          <img class="front-face" src="https://th.bing.com/th/id/R.7065a642e857dcd541d92176941fb6f3?rik=YXcCd3k7iY9fAw&riu=http%3a%2f%2fwww.hdwallpaperspulse.com%2fwp-content%2fuploads%2f2013%2f02%2fBeautiful-Animal-010.jpg&ehk=sjHAXFQhAKSbvH8VzCY9MgUvgshzTnX%2fMtwoCU%2bvY30%3d&risl=&pid=ImgRaw&r=0" alt="image1" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-        <div class="m_card" data-framework="A">
-            <img class="face" src="https://th.bing.com/th/id/R.c5167551a2007cb8bf8d7f6e5915e580?rik=UP2otjDi%2f2Eegw&riu=http%3a%2f%2fmoi-jose.m.o.pic.centerblog.net%2fo%2f085d80d8.jpg&ehk=S8pO%2fPz88HfYZfkvbk3fRWoG2ZTFyTK1xUWYl62%2fGGo%3d&risl=&pid=ImgRaw&r=0" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+        <div class="m-card" data-framework="image1">
+          <img class="front-face" src="https://th.bing.com/th/id/R.7065a642e857dcd541d92176941fb6f3?rik=YXcCd3k7iY9fAw&riu=http%3a%2f%2fwww.hdwallpaperspulse.com%2fwp-content%2fuploads%2f2013%2f02%2fBeautiful-Animal-010.jpg&ehk=sjHAXFQhAKSbvH8VzCY9MgUvgshzTnX%2fMtwoCU%2bvY30%3d&risl=&pid=ImgRaw&r=0" alt="image1" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-        <div class="m_card" data-framework="B">
-            <img class="face" src="https://th.bing.com/th/id/R.f34689d6c2f915004587a5ef0272374a?rik=OsGz72TszjgFQw&riu=http%3a%2f%2fallezlarochelle.a.l.pic.centerblog.net%2fo%2f796857ef.jpg&ehk=YVhu0Q7cbFtYMe0K86lE69Z1%2fPgysWG0Fw4fv8%2fqDxw%3d&risl=&pid=ImgRaw&r=0" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+    
+        <div class="m-card" data-framework="image2">
+          <img class="front-face" src="https://th.bing.com/th/id/R.f59e14706c8c6c57c73148745ece11c5?rik=VURGxIkxZYPcrg&riu=http%3a%2f%2fmamietitine.m.a.pic.centerblog.net%2fo%2f9526eb38.jpg&ehk=%2f5%2f6NZceur%2bYJwD59Ebs7I7hnS6n2sATG8NkwN4sGgc%3d&risl=&pid=ImgRaw&r=0" alt="image2" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-        <div class="m_card" data-framework="B">
-            <img class="face" src="https://th.bing.com/th/id/R.f34689d6c2f915004587a5ef0272374a?rik=OsGz72TszjgFQw&riu=http%3a%2f%2fallezlarochelle.a.l.pic.centerblog.net%2fo%2f796857ef.jpg&ehk=YVhu0Q7cbFtYMe0K86lE69Z1%2fPgysWG0Fw4fv8%2fqDxw%3d&risl=&pid=ImgRaw&r=0" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+        <div class="m-card" data-framework="image2">
+          <img class="front-face" src="https://th.bing.com/th/id/R.f59e14706c8c6c57c73148745ece11c5?rik=VURGxIkxZYPcrg&riu=http%3a%2f%2fmamietitine.m.a.pic.centerblog.net%2fo%2f9526eb38.jpg&ehk=%2f5%2f6NZceur%2bYJwD59Ebs7I7hnS6n2sATG8NkwN4sGgc%3d&risl=&pid=ImgRaw&r=0" alt="image2" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-        <div class="m_card" data-framework="C">
-            <img class="face" src="https://cdn.pixabay.com/photo/2015/07/09/22/50/bear-838688_960_720.jpg" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+    
+        <div class="m-card" data-framework="image3">
+          <img class="front-face" src="https://th.bing.com/th/id/R.b0d7733b4029a536a8b88426fc073b29?rik=q3vD2QuQyW9e6w&riu=http%3a%2f%2fmespetitsbonheurs74.m.e.pic.centerblog.net%2fo%2f7efc2e55.jpg&ehk=Ns%2baSc82COI%2fosA2B%2beECAOvyxY6JX9KLg2ByU94QMU%3d&risl=&pid=ImgRaw&r=0" alt="image3" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-        <div class="m_card" data-framework="C">
-            <img class="face" src="https://cdn.pixabay.com/photo/2015/07/09/22/50/bear-838688_960_720.jpg" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+        <div class="m-card" data-framework="image3">
+          <img class="front-face" src="https://th.bing.com/th/id/R.b0d7733b4029a536a8b88426fc073b29?rik=q3vD2QuQyW9e6w&riu=http%3a%2f%2fmespetitsbonheurs74.m.e.pic.centerblog.net%2fo%2f7efc2e55.jpg&ehk=Ns%2baSc82COI%2fosA2B%2beECAOvyxY6JX9KLg2ByU94QMU%3d&risl=&pid=ImgRaw&r=0" alt="image3" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-        <div class="m_card" data-framework="D">
-            <img class="face" src="https://i.pinimg.com/736x/8c/ac/b7/8cacb7131e01ccb1c2645135c6d29417.jpg" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+    
+        <div class="m-card" data-framework="image4">
+          <img class="front-face" src="https://th.bing.com/th/id/R.fb6c5fe7731063a02a2f9ab289f360ad?rik=0RG%2bgQTc6DSMgw&riu=http%3a%2f%2fwww.fondation-droit-animal.org%2fmedias%2f2018%2f03%2fP1010181-1024x768.jpg&ehk=Y0oF4iG17StPndMAZ5J1lcV4FlFSgPtoCJsSBrpgbtY%3d&risl=&pid=ImgRaw&r=0" alt="image4" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-        <div class="m_card" data-framework="D">
-            <img class="face" src="https://i.pinimg.com/736x/8c/ac/b7/8cacb7131e01ccb1c2645135c6d29417.jpg" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+        <div class="m-card" data-framework="image4">
+          <img class="front-face" src="https://th.bing.com/th/id/R.fb6c5fe7731063a02a2f9ab289f360ad?rik=0RG%2bgQTc6DSMgw&riu=http%3a%2f%2fwww.fondation-droit-animal.org%2fmedias%2f2018%2f03%2fP1010181-1024x768.jpg&ehk=Y0oF4iG17StPndMAZ5J1lcV4FlFSgPtoCJsSBrpgbtY%3d&risl=&pid=ImgRaw&r=0" alt="image4" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-        <div class="m_card" data-framework="E">
-            <img class="face" src="" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+    
+        <div class="m-card" data-framework="image5">
+          <img class="front-face" src="https://th.bing.com/th/id/R.1b3320646d1606ab2df08f6f0dc62e0d?rik=2RRcwkgoJjge8w&riu=http%3a%2f%2fmespetitsbonheurs74.m.e.pic.centerblog.net%2fo%2f39d671a6.jpg&ehk=bsNnlv%2bcANBz4hxWnTh0z42Nm4rMNbhiKBCWix02AHU%3d&risl=&pid=ImgRaw&r=0" alt="image5" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-        <div class="m_card" data-framework="E">
-            <img class="face" src="" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+        <div class="m-card" data-framework="image5">
+          <img class="front-face" src="https://th.bing.com/th/id/R.1b3320646d1606ab2df08f6f0dc62e0d?rik=2RRcwkgoJjge8w&riu=http%3a%2f%2fmespetitsbonheurs74.m.e.pic.centerblog.net%2fo%2f39d671a6.jpg&ehk=bsNnlv%2bcANBz4hxWnTh0z42Nm4rMNbhiKBCWix02AHU%3d&risl=&pid=ImgRaw&r=0" alt="image5" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-        <div class="m_card" data-framework="F">
-            <img class="face" src="" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+    
+        <div class="m-card" data-framework="image6">
+          <img class="front-face" src="https://th.bing.com/th/id/R.bcd627cf2a1172e412ca2df1e9437d63?rik=Rep80YfZ2EkdPg&riu=http%3a%2f%2fmespetitsbonheurs74.m.e.pic.centerblog.net%2fo%2fd7179c01.jpg&ehk=KnGyEyDZog37Y%2b93wUzj7WKQOAixid7VDAkGfhf406s%3d&risl=&pid=ImgRaw&r=0" alt="image6" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-        <div class="m_card" data-framework="F">
-            <img class="face" src="" >
-            <img class="back" src="https://th.bing.com/th/id/R.42829485800269931b77872306667ba2?rik=KPPKHhRjhZFm5g&riu=http%3a%2f%2fbpac.org.nz%2fimg%2fhome-list%2fquiz.jpg&ehk=WXgc9GQDEaoT%2braqDaZ8E5OQMzHq0Ftp8%2bmYw4%2b26PM%3d&risl=&pid=ImgRaw&r=0">
+        <div class="m-card" data-framework="image6">
+          <img class="front-face" src="https://th.bing.com/th/id/R.bcd627cf2a1172e412ca2df1e9437d63?rik=Rep80YfZ2EkdPg&riu=http%3a%2f%2fmespetitsbonheurs74.m.e.pic.centerblog.net%2fo%2fd7179c01.jpg&ehk=KnGyEyDZog37Y%2b93wUzj7WKQOAixid7VDAkGfhf406s%3d&risl=&pid=ImgRaw&r=0" alt="image6" />
+          <img class="back-face" src="R.jpg"  />
         </div>
-    </section>
+      </section>
 
 
     <script>
-        const cards = document.querySelectorAll('.m_card');
-        let hasFlip = false;
+        const cards = document.querySelectorAll('.m-card');
+
+        let hasFlippedCard = false;
+        let lockBoard = false;
         let firstCard, secondCard;
+
         function flipCard() {
-            this.classList.add('flip');
-            if (!hasFlip) {
-                // 1click
-                hasFlip = true;
-                firstCard = this;
-                return;
-            } 
-            // 2card
-            hasFlip = false;
-            secondCard = this; 
-            checkmatch();
+        if (lockBoard) return;
+        if (this === firstCard) return;
+
+        this.classList.add('flip');
+
+        if (!hasFlippedCard) {
+            hasFlippedCard = true;
+            firstCard = this;
+
+            return;
         }
-        // match?
-        function checkmatch(){
-            let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-            isMatch ? disablecards() : unflipcards();
+
+        secondCard = this;
+        checkForMatch();
         }
-        function disablecards(){
-            firstCard.removeEventListener('click', flipCard);
-            secondCard.removeEventListener('click', flipCard);
+
+        function checkForMatch() {
+        let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+
+        isMatch ? disableCards() : unflipCards();
         }
-        function unflipcards(){
-             setTimeout(() => {
-                firstCard.classList.remove('flip');
-                secondCard.classList.remove('flip');
-            }, 1500);
+
+        function disableCards() {
+        firstCard.removeEventListener('click', flipCard);
+        secondCard.removeEventListener('click', flipCard);
+
+        resetBoard();
         }
+
+        function unflipCards() {
+        lockBoard = true;
+
+        setTimeout(() => {
+            firstCard.classList.remove('flip');
+            secondCard.classList.remove('flip');
+
+            resetBoard();
+        }, 1500);
+        }
+
+        function resetBoard() {
+        [hasFlippedCard, lockBoard] = [false, false];
+        [firstCard, secondCard] = [null, null];
+        }
+
+        (function shuffle() {
+        cards.forEach(card => {
+            let randomPos = Math.floor(Math.random() * 12);
+            card.style.order = randomPos;
+        });
+        })();
+
         cards.forEach(card => card.addEventListener('click', flipCard));
     </script>
+    
+    
+    
 </body>
 </html>
