@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Remember Me</title>
     <style>
         
         * {
@@ -26,6 +26,7 @@
             display: flex;
             flex-wrap: wrap;
             perspective: 1000px;
+            justify-content: center;
         }
 
         .m-card {
@@ -63,11 +64,86 @@
         .front-face {
              transform: rotateY(180deg);
         }
+        .win-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 64px;
+            font-weight: bold;
+            display: none;
+        }
+        .lose-message{
+          position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 64px;
+            font-weight: bold;
+            display: none;
+        }
+        #js-timer{
+          text-align: center;
+          margin-right:50px ;
+        }
+        #timer{
+          background-color:beige;
+          width: 100px;
+          margin: 50px auto;
+          font-size: 40px;
+          font-weight: 600;
+        }
+        button {
+          display: flex;
+          height: 3em;
+          width: 100px;
+          align-items: center;
+          justify-content: center;
+          background-color: #eeeeee4b;
+          border-radius: 3px;
+          letter-spacing: 1px;
+          transition: all 0.2s linear;
+          cursor: pointer;
+          border: none;
+          background: none;
+          align-self: flex-end;
+
+        }
+
+        button > svg {
+          margin-right: 5px;
+          margin-left: 5px;
+          font-size: 20px;
+          transition: all 0.4s ease-in;
+        }
+
+        button:hover > svg {
+          font-size: 1.2em;
+          transform: translateX(-5px);
+        }
+
+        button:hover {
+          box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+          transform: translateY(-2px);
+        }
+        a{
+          color: black;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
-    
+    <header><div id="js-timer">
+      <div id="timer">00:30</div>
+    </div></header>
     <section class="container">
+      
         <div class="m-card" data-framework="image1">
           <img class="front-face" src="https://th.bing.com/th/id/R.7065a642e857dcd541d92176941fb6f3?rik=YXcCd3k7iY9fAw&riu=http%3a%2f%2fwww.hdwallpaperspulse.com%2fwp-content%2fuploads%2f2013%2f02%2fBeautiful-Animal-010.jpg&ehk=sjHAXFQhAKSbvH8VzCY9MgUvgshzTnX%2fMtwoCU%2bvY30%3d&risl=&pid=ImgRaw&r=0" alt="image1" />
           <img class="back-face" src="R.jpg"  />
@@ -122,68 +198,122 @@
           <img class="back-face" src="R.jpg"  />
         </div>
       </section>
+      <audio id="match-sound" src="WRONG ANSWER SOUND EFFECT.mp3"></audio>
+      
+      <div class="lose-message" id="lose-message">You Lose!</div>
+      <button>
+        <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024"><path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path></svg>
+        <span><a href="page3.html">Back</a></span>
+      </button>
+      
 
-
-    <script>
+      <script>
         const cards = document.querySelectorAll('.m-card');
-
+        const winMessage = document.createElement('div');
+        winMessage.textContent = 'You Win!';
+        winMessage.classList.add('win-message');
+        document.body.appendChild(winMessage);
+    
         let hasFlippedCard = false;
         let lockBoard = false;
         let firstCard, secondCard;
-
+        
+        
         function flipCard() {
-        if (lockBoard) return;
-        if (this === firstCard) return;
-
-        this.classList.add('flip');
-
-        if (!hasFlippedCard) {
-            hasFlippedCard = true;
-            firstCard = this;
-
-            return;
+            if (lockBoard) return;
+            if (this === firstCard) return;
+    
+            this.classList.add('flip');
+    
+            if (!hasFlippedCard) {
+                hasFlippedCard = true;
+                firstCard = this;
+            } else {
+                secondCard = this;
+                checkForMatch();
+            }
         }
-
-        secondCard = this;
-        checkForMatch();
-        }
-
+    
         function checkForMatch() {
-        let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-
-        isMatch ? disableCards() : unflipCards();
+            let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+    
+            isMatch ? disableCards() : unflipCards();
         }
-
+    
         function disableCards() {
-        firstCard.removeEventListener('click', flipCard);
-        secondCard.removeEventListener('click', flipCard);
-
-        resetBoard();
-        }
-
-        function unflipCards() {
-        lockBoard = true;
-
-        setTimeout(() => {
-            firstCard.classList.remove('flip');
-            secondCard.classList.remove('flip');
-
+            firstCard.removeEventListener('click', flipCard);
+            secondCard.removeEventListener('click', flipCard);
+            
             resetBoard();
-        }, 1500);
+            checkWin();
         }
-
+    
+        function unflipCards() {
+            lockBoard = true;
+    
+            setTimeout(() => {
+                firstCard.classList.remove('flip');
+                secondCard.classList.remove('flip');
+              
+                resetBoard();
+            }, 1500);
+        }
+    
         function resetBoard() {
-        [hasFlippedCard, lockBoard] = [false, false];
-        [firstCard, secondCard] = [null, null];
+            [hasFlippedCard, lockBoard] = [false, false];
+            [firstCard, secondCard] = [null, null];
         }
-
+    
+        function checkWin() {
+            const allMatched = Array.from(cards).every(card => card.classList.contains('flip'));
+            if (allMatched) {
+                clearInterval(timer);
+                winMessage.style.display = 'block';
+            }
+        }
+        
+    
         (function shuffle() {
-        cards.forEach(card => {
-            let randomPos = Math.floor(Math.random() * 12);
-            card.style.order = randomPos;
-        });
+            cards.forEach(card => {
+                let randomPos = Math.floor(Math.random() * 12);
+                card.style.order = randomPos;
+            });
         })();
 
+
+        var timer;
+        var ele =document.getElementById('timer');
+        (function(){
+          var sec=30;
+          timer=setInterval(()=>{
+            sec--;
+            ele.innerHTML = formatTime(sec);
+            if (sec <= 0) {
+            clearInterval(timer);
+            endGame();
+        }
+          },1000)
+        })();
+        function formatTime(seconds) {
+          var min = Math.floor(seconds / 60);
+          var sec = seconds % 60;
+          return (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec;
+        }
+        const loseMessage = document.getElementById('lose-message');
+        function endGame() {
+            // Désactiver les événements de clic sur les cartes
+            cards.forEach(card => card.removeEventListener('click', flipCard));
+             // Play the match sound
+            const matchSound = document.getElementById('match-sound');
+            matchSound.play();
+            // Afficher un message de fin de jeu
+            loseMessage.style.display = 'block';
+        }
+        
+
+        
+
+        
         cards.forEach(card => card.addEventListener('click', flipCard));
     </script>
     
